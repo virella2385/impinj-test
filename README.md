@@ -3,4 +3,4 @@
 To run `dotnet watch run `
 
 #### endpoints
- `GET` `api/Parser `
+ `GET` `http:localhost:5254/api/Parser`
