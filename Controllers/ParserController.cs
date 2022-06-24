@@ -23,7 +23,6 @@ public class ParserController : ControllerBase
     {
         List<SalesRecord> records = new List<SalesRecord>();
         string path = Directory.GetCurrentDirectory() + @"/Input/SalesRecord.csv";
-        long lineCount = getLineCount(path);        
         string line;
         string[] row = new string [13];
         StreamReader sr = new StreamReader(path);
@@ -64,20 +63,6 @@ public class ParserController : ControllerBase
         salesRecord.TotalProfit = record[13] != null ? double.Parse(record[13]) : null;
         return salesRecord;
         
-    }
-
-    private long getLineCount(string path) 
-    {
-        long count = 0;
-        using (StreamReader r = new StreamReader(path))
-        {
-            string line;
-            while ((line = r.ReadLine()) != null)
-            {
-            count++;
-            }
-        }
-        return count;
     }
 
     public double getMedian(List<SalesRecord> records)
