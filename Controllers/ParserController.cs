@@ -24,9 +24,15 @@ public class ParserController : ControllerBase
         List<SalesRecord> records = new List<SalesRecord>();
         string path = Directory.GetCurrentDirectory() + @"/Input/SalesRecord.csv";
         string line;
-        string[] row = new string [13];
+        int colSize = 13;
         StreamReader sr = new StreamReader(path);
-        string headerLine = line = sr.ReadLine();
+        string headerLine = sr.ReadLine();
+
+        if (headerLine != null && headerLine.Split(',').Length > 0)
+        {
+            colSize = headerLine.Split(',').Length;
+        }
+        string[] row = new string[colSize];
 
         while ((line = sr.ReadLine()) != null)
         {
