@@ -18,7 +18,7 @@ public class ParserController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet]
+    [HttpGet("")]
     public SalesRecordResponse Get()
     {
         List<SalesRecord> records = new List<SalesRecord>();
@@ -71,18 +71,18 @@ public class ParserController : ControllerBase
         
     }
 
-    public double getMedian(List<SalesRecord> records)
+    private double getMedian(List<SalesRecord> records)
     {
         int midIdx = (records.Count - 1) / 2;
         return records.ElementAt(midIdx).UnitCost.Value;
     }
 
-    public string getMostCommonRegion(List<SalesRecord> records)
+    private string getMostCommonRegion(List<SalesRecord> records)
     {
         return records.GroupBy(x => x.Region).OrderByDescending(g => g.Count()).First().ToList().FirstOrDefault().Region;
     }
 
-    public DateData processDates(List<SalesRecord> records)
+    private DateData processDates(List<SalesRecord> records)
     {
         DateTime lastDate = records.OrderByDescending(x => x.OrderDate).First().OrderDate.Value;
         DateTime firstDate = records.OrderByDescending(x => x.OrderDate).Last().OrderDate.Value;
